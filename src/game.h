@@ -5,4 +5,6 @@
 #ifndef ROCK_PAPER_SCISSORS_GAME_GAME_H
 #define ROCK_PAPER_SCISSORS_GAME_GAME_H
 
+int decideWinner(int p1, int p2);
+
 #endif //ROCK_PAPER_SCISSORS_GAME_GAME_H

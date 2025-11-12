@@ -54,3 +54,23 @@ PlayerMap loadAllPlayers(const std::string& filename) {
 
     return players;
 }
+// 将所有玩家写回文件
+void saveAllPlayers(const std::string& filename, const PlayerMap& players) {
+    fs::path filePath(filename);
+    fs::path dirPath = filePath.parent_path();
+
+    // 确保目录存在
+    if (!fs::exists(dirPath)) {
+        fs::create_directories(dirPath);
+    }
+
+    std::ofstream file(filename, std::ios::trunc);
+    if (!file.is_open()) {
+        std::cerr << "Error: cannot open " << filename << " for writing.\n";
+        return;
+    }
+
+    for (const auto& [name, p] : players) {
+        file << p.name << " " << p.wins << " " << p.losses << " " << p.draws << "\n";
+    }
+}

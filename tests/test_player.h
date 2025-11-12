@@ -6,3 +6,4 @@
 #define ROCK_PAPER_SCISSORS_GAME_TEST_PLAYER_H
 
 #endif //ROCK_PAPER_SCISSORS_GAME_TEST_PLAYER_H
+void test_update_record();

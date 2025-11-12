@@ -6,11 +6,6 @@
 #include <string>
 #include "game.h"
 #include "player.h"
-int main() {
- // print hello world
-    std::cout << "hello world!\n";
-
-}
 
 
 //--------------------------------------------
@@ -119,4 +114,44 @@ void startMatch(PlayerMap& players, const std::string& logFile) {
         int again = readInt("\nPlay again with same players? (1=Yes, 2=No): ", 1, 2);
         playAgain = (again == 1);
     }
+}
+int main() {
+    const std::string userFile = "data/users.txt";
+    const std::string logFile  = "data/game_log.txt";
+
+    PlayerMap players = loadAllPlayers(userFile);
+    std::cout << "=== Welcome to Rock Paper Scissors ===\n";
+
+    bool running = true;
+    while (running) {
+        std::cout << "\n===== Main Menu =====\n";
+        std::cout << "1. Start match\n";
+        std::cout << "2. Show all users\n";
+        std::cout << "3. Show game history\n";
+        std::cout << "4. Exit\n";
+        std::cout << "Enter your choice: ";
+
+        int choice = readInt("Enter your choice: ", 1, 4);
+
+        switch (choice) {
+        case 1:
+            startMatch(players, logFile);
+            break;
+        case 2:
+            showAllUsers(players);
+            break;
+        case 3:
+            showGameHistory(logFile);
+            break;
+        case 4:
+            running = false;
+            break;
+        default:
+            std::cout << "Invalid choice. Please enter 1–4.\n";
+        }
+    }
+
+    saveAllPlayers(userFile, players);
+    std::cout << "\nAll records saved. Goodbye!\n";
+    return 0;
 }

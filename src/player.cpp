@@ -54,3 +54,10 @@ PlayerMap loadAllPlayers(const std::string& filename) {
 
     return players;
 }
+// 获取玩家（不存在则创建）
+Player& getOrCreatePlayer(PlayerMap& players, const std::string& name) {
+    if (players.find(name) == players.end()) {
+        players[name] = Player{name};
+    }
+    return players[name];
+}

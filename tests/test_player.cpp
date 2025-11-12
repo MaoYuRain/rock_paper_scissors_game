@@ -1,6 +1,14 @@
 //
 // Created by maoyu on 2025/11/12.
 //
+// tests/test_player.cpp
+#include <catch2/catch_test_macros.hpp>  // ✅ 必须有这一行！
+#include "../src/player.h"
+#include <filesystem>
+#include <fstream>
+
+namespace fs = std::filesystem;
+
 TEST_CASE("saveAllPlayers and loadAllPlayers handle files correctly", "[fileio]") {
     const std::string testFile = "tmp/test_players.txt";
     fs::create_directories("tmp");

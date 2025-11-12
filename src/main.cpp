@@ -68,3 +68,55 @@ void showGameHistory(const std::string& filename) {
     }
     file.close();
 }
+
+
+//--------------------------------------------
+// 开始一场对战（多轮）
+//--------------------------------------------
+void startMatch(PlayerMap& players, const std::string& logFile) {
+    std::cout << "\n=== Current Player List ===\n";
+    if (players.empty()) {
+        std::cout << "No existing players yet. New players will be created automatically.\n";
+    } else {
+        int index = 1;
+        for (const auto& [name, p] : players) {
+            std::cout << " " << index++ << ". " << name << "\n";   // ✅ 只显示玩家名字
+        }
+    }
+
+    std::string name1, name2;
+    std::cout << "\nEnter Player 1 name (or new name to create): ";
+    std::getline(std::cin, name1);
+    std::cout << "Enter Player 2 name (or new name to create): ";
+    std::getline(std::cin, name2);
+
+    Player& p1 = getOrCreatePlayer(players, name1);
+    Player& p2 = getOrCreatePlayer(players, name2);
+
+    bool playAgain = true;
+    while (playAgain) {
+        int c1 = getMaskedChoice(1);
+        int c2 = getMaskedChoice(2);
+
+        int result = decideWinner(c1, c2);
+        updateRecord(p1, p2, result);
+        logGame(logFile, p1, c1, p2, c2, result);
+
+        std::cout << "\n" << p1.name << " chose: " << choiceToString(c1)
+                  << "\n" << p2.name << " chose: " << choiceToString(c2) << "\n";
+
+        if (result == 0)
+            std::cout << "It's a draw!\n";
+        else if (result == 1)
+            std::cout << p1.name << " wins!\n";
+        else
+            std::cout << p2.name << " wins!\n";
+
+        std::cout << "\nUpdated Records:\n";
+        std::cout << p1.name << " (W:" << p1.wins << " L:" << p1.losses << " D:" << p1.draws << ")\n";
+        std::cout << p2.name << " (W:" << p2.wins << " L:" << p2.losses << " D:" << p2.draws << ")\n";
+
+        int again = readInt("\nPlay again with same players? (1=Yes, 2=No): ", 1, 2);
+        playAgain = (again == 1);
+    }
+}

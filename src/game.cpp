@@ -14,3 +14,12 @@ int decideWinner(int p1, int p2) {
     else
         return 2;
 }
+// 数字转文字
+std::string choiceToString(int choice) {
+    switch (choice) {
+        case 1: return "Rock";
+        case 2: return "Paper";
+        case 3: return "Scissors";
+        default: return "Invalid";
+    }
+}

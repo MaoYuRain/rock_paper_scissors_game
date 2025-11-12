@@ -35,3 +35,19 @@ void logGame(const std::string& filename, const Player& p1, int c1,
     file << "\n";
     file.close();
 }
+
+//--------------------------------------------
+// 显示所有用户
+//--------------------------------------------
+void showAllUsers(const PlayerMap& players) {
+    std::cout << "\n=== All Users ===\n";
+    if (players.empty()) {
+        std::cout << "No users found.\n";
+        return;
+    }
+    for (const auto& [name, p] : players) {
+        std::cout << name << " -> Wins: " << p.wins
+                  << ", Losses: " << p.losses
+                  << ", Draws: " << p.draws << "\n";
+    }
+}

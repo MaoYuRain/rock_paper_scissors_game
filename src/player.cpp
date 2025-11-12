@@ -63,13 +63,6 @@ void saveAllPlayers(const std::string& filename, const PlayerMap& players) {
     if (!fs::exists(dirPath)) {
         fs::create_directories(dirPath);
     }
-// 获取玩家（不存在则创建）
-Player& getOrCreatePlayer(PlayerMap& players, const std::string& name) {
-    if (players.find(name) == players.end()) {
-        players[name] = Player{name};
-    }
-    return players[name];
-}
 
     std::ofstream file(filename, std::ios::trunc);
     if (!file.is_open()) {
@@ -80,6 +73,13 @@ Player& getOrCreatePlayer(PlayerMap& players, const std::string& name) {
     for (const auto& [name, p] : players) {
         file << p.name << " " << p.wins << " " << p.losses << " " << p.draws << "\n";
     }
+}
+// 获取玩家（不存在则创建）
+Player& getOrCreatePlayer(PlayerMap& players, const std::string& name) {
+    if (players.find(name) == players.end()) {
+        players[name] = Player{name};
+    }
+    return players[name];
 }
 
 // 根据胜负结果更新记录

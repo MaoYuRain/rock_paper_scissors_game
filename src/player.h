@@ -21,5 +21,7 @@ using PlayerMap = std::map<std::string, Player>;
 PlayerMap loadAllPlayers(const std::string& filename);
 void saveAllPlayers(const std::string& filename, const PlayerMap& players);
 Player& getOrCreatePlayer(PlayerMap& players, const std::string& name);
+void updateRecord(Player& p1, Player& p2, int result);
+
 
 #endif //ROCK_PAPER_SCISSORS_GAME_PLAYER_H

@@ -9,7 +9,16 @@ FetchContent_MakeAvailable(catch2)
 
 add_executable(test_game test_game.cpp)
 target_link_libraries(test_game PRIVATE game_lib Catch2::Catch2WithMain)
+add_executable(test_player test_player.cpp)
+target_link_libraries(test_player PRIVATE game_lib Catch2::Catch2WithMain)
 
 include(CTest)
 include(Catch)
 catch_discover_tests(test_game)
+catch_discover_tests(test_player)
+
+add_custom_target(run_all_tests
+        COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+        DEPENDS test_game test_player
+)
+

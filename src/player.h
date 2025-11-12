@@ -1,0 +1,8 @@
+//
+// Created by maoyu on 2025/11/12.
+//
+
+#ifndef ROCK_PAPER_SCISSORS_GAME_PLAYER_H
+#define ROCK_PAPER_SCISSORS_GAME_PLAYER_H
+
+#endif //ROCK_PAPER_SCISSORS_GAME_PLAYER_H

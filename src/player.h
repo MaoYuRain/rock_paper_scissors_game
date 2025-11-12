@@ -19,5 +19,6 @@ struct Player {
 using PlayerMap = std::map<std::string, Player>;
 
 PlayerMap loadAllPlayers(const std::string& filename);
+Player& getOrCreatePlayer(PlayerMap& players, const std::string& name);
 
 #endif //ROCK_PAPER_SCISSORS_GAME_PLAYER_H

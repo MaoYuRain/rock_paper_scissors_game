@@ -51,3 +51,20 @@ void showAllUsers(const PlayerMap& players) {
                   << ", Draws: " << p.draws << "\n";
     }
 }
+
+//--------------------------------------------
+// 显示比赛记录
+//--------------------------------------------
+void showGameHistory(const std::string& filename) {
+    std::ifstream file(filename);
+    std::cout << "\n=== Game History ===\n";
+    if (!file.is_open()) {
+        std::cout << "No history file found.\n";
+        return;
+    }
+    std::string line;
+    while (std::getline(file, line)) {
+        std::cout << line << "\n";
+    }
+    file.close();
+}
